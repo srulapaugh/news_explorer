@@ -3,11 +3,11 @@ import { useState, useEffect } from "react";
 
 import Header from "../Header/Header";
 
-import { sampleArticles } from "../../utils/constants";
+//import { sampleArticles } from "../../utils/constants";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [activeModal, setActiveModal] = useState("");
 
   return (
     <div className="app">
