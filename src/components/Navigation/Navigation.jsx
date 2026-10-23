@@ -52,12 +52,12 @@ function Navigation({
           <img
             className="navigation__icon navigation__icon_theme_light"
             src={logoutIconLight}
-            alt=""
+            alt="Logout"
           />
           <img
             className="navigation__icon navigation__icon_theme_dark"
             src={logoutIconDark}
-            alt=""
+            alt="Logout"
           />
         </button>
       ) : (

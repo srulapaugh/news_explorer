@@ -1,0 +1,30 @@
+.main__intro {
+  background-color: #1a1b22; /* fallback while the image loads */
+  background-image: url("../../assets/headerbackgroundphoto.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  box-sizing: border-box;
+  border: 1px;
+  min-height: 480px;
+  padding: 160px 16px 64px;
+}
+
+.main__intro-content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.main__title {
+  font-family: "Roboto Slab", Arial, sans-serif;
+  font-size: 60px;
+  font-weight: 400;
+  line-height: 64px;
+}
+
+.main__subtitle {
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+}
