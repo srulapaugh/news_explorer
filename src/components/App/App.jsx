@@ -12,6 +12,11 @@ import "./App.css";
 function App() {
   const [activeModal, setActiveModal] = useState("");
 
+  const [articles, setArticles] = useState([]);
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasSearched, setHasSearched] = useState(false);
+
   const handleRegistration = ({ name, avatar, email, password }) => {
     signup({ name, avatar, email, password })
       .then(() => handleLogin({ email, password }))
@@ -50,10 +55,28 @@ function App() {
     setCurrentUser({});
   };
 
+  const handleSearch = (keyword) => {
+    setSearchKeyword(keyword);
+    setHasSearched(true);
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setArticles(sampleArticles);
+      setIsLoading(false);
+    }, 1500);
+  };
+
   return (
     <div className="app">
       <Header />
-      <Main />
+      <Main
+        articles={articles}
+        isLoading={isLoading}
+        hasSearched={hasSearched}
+        // savedArticles={savedArticles}
+        //onSearch={onSearch}
+        //onSaveArticle={onSaveArticle}
+      />
       {/*
       <RegisterModal
         isOpen={activeModal === "register"}

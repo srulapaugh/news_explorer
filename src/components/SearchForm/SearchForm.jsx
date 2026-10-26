@@ -8,7 +8,10 @@ function SearchForm({ onSearch }) {
   const handleChange = (evt) => setKeyword(evt.target.value);
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    onSearch(keyword.trim());
+    const trimmedKeyword = keyword.trim();
+    if (trimmedKeyword) {
+      onSearch(trimmedKeyword);
+    }
   };
 
   return (
