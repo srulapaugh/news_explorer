@@ -42,8 +42,7 @@ function Header({ isLoggedIn, currentUser, onSignInClick, onSignOut }) {
         <button
           type="button"
           className="header__menu-button"
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMenuOpen}
+          title={isMenuOpen ? "Close menu" : "Open menu"}
           onClick={toggleMenu}
         >
           <img className="header__menu-icon" src={menuButtonIcon} alt="" />

@@ -19,7 +19,7 @@ function Navigation({
   return (
     <nav
       className={isOpen ? "navigation navigation_opened" : "navigation"}
-      aria-label="Main"
+      title="Main"
     >
       <ul className="navigation__list">
         <li className="navigation__item">
