@@ -1,5 +1,6 @@
 import SearchForm from "../SearchForm/SearchForm";
 import "./Main.css";
+import "../../vendor/fonts.css";
 
 function Main({ onSearch }) {
   return (
