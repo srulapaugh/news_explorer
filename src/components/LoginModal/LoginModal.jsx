@@ -1,4 +1,4 @@
-//import { useFormWithValidation } from "../../hooks/useFormWithValidation";
+import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {

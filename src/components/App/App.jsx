@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-//import LoginModal from "../LoginModal/LoginModal";
-//import RegisterModal from "../RegisterModal/RegisterModal";
+import LoginModal from "../LoginModal/LoginModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import Footer from "../Footer/Footer";
 
 //import { sampleArticles } from "../../utils/constants";
@@ -12,6 +12,7 @@ import "./App.css";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const [articles, setArticles] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -79,7 +80,7 @@ function App() {
         //onSaveArticle={onSaveArticle}
       />
       <Footer />
-      {/*
+
       <RegisterModal
         isOpen={activeModal === "register"}
         onRegister={handleRegistration}
@@ -91,8 +92,7 @@ function App() {
         onLogin={handleLogin}
         onClose={closeActiveModal}
         onSwitchModal={() => handleOpenModal("register")}
-      />{" "}
-      */}
+      />
     </div>
   );
 }
