@@ -1,4 +1,5 @@
 import SearchForm from "../SearchForm/SearchForm";
+import About from "../About/About";
 import "./Main.css";
 import "../../vendor/fonts.css";
 
@@ -15,6 +16,7 @@ function Main({ onSearch }) {
           <SearchForm onSearch={onSearch} />
         </div>
       </section>
+      <About />
     </main>
   );
 }
