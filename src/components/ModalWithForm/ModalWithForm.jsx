@@ -13,8 +13,15 @@ function ModalWithForm({
   toggleText,
   onToggleClick,
 }) {
+  const handleOverlayClick = (evt) => {
+    if (evt.target === evt.currentTarget) onClose();
+  };
+
   return (
-    <div className={`modal modal_type_${name} ${isOpen ? "modal_opened" : ""}`}>
+    <div
+      className={`modal modal_type_${name} ${isOpen ? "modal_opened" : ""}`}
+      onClick={handleOverlayClick}
+    >
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
         <button onClick={onClose} className="modal__close" type="button">

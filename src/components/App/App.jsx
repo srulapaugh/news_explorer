@@ -12,7 +12,9 @@ import "./App.css";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser] = useState({ name: "" });
 
   const [articles, setArticles] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -26,7 +28,7 @@ function App() {
   };
 
   const handleOpenModal = (modalName) => setActiveModal(modalName);
-  const closeActiveModal = () => setActiveModal("");
+  const handleCloseModal = () => setActiveModal("");
 
   const handleLogin = ({ email, password }) => {
     if (!email || !password) {
@@ -70,7 +72,12 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
+      <Header
+        isLoggedIn={isLoggedIn}
+        currentUser={currentUser}
+        onSignInClick={() => handleOpenModal("login")}
+        onSignOut={handleSignOut}
+      />
       <Main
         articles={articles}
         isLoading={isLoading}
@@ -84,14 +91,14 @@ function App() {
       <RegisterModal
         isOpen={activeModal === "register"}
         onRegister={handleRegistration}
-        onClose={closeActiveModal}
+        onClose={handleCloseModal}
         onSwitchModal={() => handleOpenModal("login")}
       />
       <LoginModal
         isOpen={activeModal === "login"}
+        onClose={handleCloseModal}
         onLogin={handleLogin}
-        onClose={closeActiveModal}
-        onSwitchModal={() => handleOpenModal("register")}
+        onToggleClick={() => handleOpenModal("register")}
       />
     </div>
   );

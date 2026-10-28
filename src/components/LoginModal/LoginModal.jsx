@@ -47,14 +47,14 @@ const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {
 
   return (
     <ModalWithForm
-      name="login"
-      title="Log in"
-      buttonText="Log in"
+      name="Sign in"
+      title="Sign in"
+      buttonText="Sign in"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
-      toggleText="or Signup"
+      toggleText="or Sign up"
       onToggleClick={onToggleClick}
     >
       <label htmlFor="login-email" className="modal__label">
