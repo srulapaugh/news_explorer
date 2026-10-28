@@ -29,7 +29,7 @@ function Footer() {
           </li>
           <li className="footer__item">
             <a
-              href="https://linkedin.com/samrulapaugh"
+              href="https://linkedin.com/samantharulapaugh"
               className="footer__link"
             >
               <img src={linkedInIcon} alt="LinkedIn" className="footer__icon" />

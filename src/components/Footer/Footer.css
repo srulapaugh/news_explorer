@@ -32,3 +32,36 @@
   color: #1a1b22;
   text-decoration: none;
 }
+
+.footer__link:hover {
+  opacity: 0.6;
+}
+
+.footer__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+@media (max-width: 1024px) {
+  .footer {
+    padding: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 24px 16px;
+  }
+
+  .footer__list {
+    gap: 24px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+  }
+}
