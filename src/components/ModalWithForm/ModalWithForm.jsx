@@ -43,13 +43,17 @@ function ModalWithForm({
               {buttonText}
             </button>
             {toggleText && (
-              <button
-                type="button"
-                className="modal__toggle-link"
-                onClick={onToggleClick}
-              >
-                {toggleText}
-              </button>
+              <p className="modal__toggle">
+                {" "}
+                or{" "}
+                <button
+                  type="button"
+                  className="modal__toggle-link"
+                  onClick={onToggleClick}
+                >
+                  {toggleText}
+                </button>
+              </p>
             )}
           </div>
         </form>

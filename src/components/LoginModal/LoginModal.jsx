@@ -54,7 +54,7 @@ const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
-      toggleText="or Sign up"
+      toggleText=" Sign up"
       onToggleClick={onToggleClick}
     >
       <label htmlFor="login-email" className="modal__label">
