@@ -131,61 +131,16 @@
   display: block;
 }
 
-.modal__radio-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin: 0 0 32px;
-  padding: 0;
-  border: none;
-}
-
-.modal__legend {
-  margin: 0 0 12px;
-  padding: 0;
-
-  font-family: "Cabinet Grotesk", Arial, sans-serif;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 700;
-}
-
-.modal__label_type_radio {
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-
-  margin: 0;
-
-  color: rgba(0, 0, 0, 0.5);
-
-  cursor: pointer;
-}
-
-.modal__radio-input {
-  width: 16px;
-  height: 16px;
-  margin: 0;
-
-  accent-color: #000;
-
-  cursor: pointer;
-}
-
-.modal__label_type_radio:has(.modal__radio-input:checked) {
-  color: #000;
-}
-
 .modal__submit {
   position: flex;
   top: 0;
   right: 0;
   height: 64px;
   width: 360px;
-  background-color: #2f71e5;
+  background-color: #e6e8eb;
   border: none;
   border-radius: 100px;
-  color: #fff;
+  color: #b6bcbf;
   font-family: "Roboto", Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -194,12 +149,9 @@
   transition: background-color 0.2s ease;
 }
 
-.modal__submit:hover {
-  background-color: #347eff;
-}
-
 .modal__submit:active {
   background-color: #2a65cc;
+  color: #fff;
 }
 
 .modal__button-row {
@@ -237,32 +189,33 @@
 
 .modal_type_register .modal__content,
 .modal_type_login .modal__content {
-  width: 360px;
-  min-height: auto;
+  width: 430px;
+  height: 457px;
   padding: 20px 24px 24px;
   border-radius: 16px;
 }
 
 .modal_type_register .modal__title,
 .modal_type_login .modal__title {
-  margin-bottom: 16px;
-  font-size: 15px;
-  line-height: 18px;
+  margin-bottom: 24px;
+  font-size: 24px;
+  line-height: 100%;
 }
 
 .modal_type_register .modal__label,
 .modal_type_login .modal__label {
   margin-bottom: 16px;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 12px;
+  line-height: 100%;
+  color: #2f71e5;
 }
 
 .modal_type_register .modal__input,
 .modal_type_login .modal__input {
-  height: 24px;
+  height: 47px;
   margin-top: 6px;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 14px;
+  line-height: 100%;
 }
 
 .modal_type_register .modal__submit,
@@ -270,8 +223,9 @@
   min-width: 90px;
   min-height: 32px;
   padding: 6px 14px;
-  font-size: 13px;
+  font-size: 18px;
   line-height: 16px;
+  margin-top: 4px;
 }
 
 @media screen and (max-width: 600px) {

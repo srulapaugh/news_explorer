@@ -3,16 +3,14 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
   const defaultValues = {
-    name: "",
-    avatar: "",
     email: "",
     password: "",
+    name: "",
   };
 
   const validateForm = (formValues) => {
     const nextErrors = {};
     const trimmedName = formValues.name.trim();
-    const trimmedAvatar = formValues.avatar.trim();
     const trimmedEmail = formValues.email.trim();
 
     if (!trimmedName) {
@@ -21,12 +19,6 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
       nextErrors.name = "Name must be at least 2 characters.";
     } else if (trimmedName.length > 30) {
       nextErrors.name = "Name must be 30 characters or fewer.";
-    }
-
-    if (!trimmedAvatar) {
-      nextErrors.avatar = "Please add an image URL.";
-    } else if (!/^https?:\/\/.+/i.test(trimmedAvatar)) {
-      nextErrors.avatar = "Please enter a valid image URL.";
     }
 
     if (!trimmedEmail) {
@@ -72,45 +64,9 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
-      toggleText="or Log In"
+      toggleText=" Sign In"
       onToggleClick={onToggleClick}
     >
-      <label htmlFor="register-name" className="modal__label">
-        Name{" "}
-        <input
-          type="text"
-          name="name"
-          className={`modal__input ${showError("name") ? "modal__input_invalid" : ""}`}
-          id="register-name"
-          placeholder="Name"
-          value={values.name}
-          onChange={handleChange}
-          aria-invalid={showError("name")}
-        />
-        <span
-          className={`modal__error ${showError("name") ? "modal__error_visible" : ""}`}
-        >
-          {errors.name || ""}
-        </span>
-      </label>
-      <label htmlFor="avatar" className="modal__label">
-        Avatar{" "}
-        <input
-          type="text"
-          className={`modal__input ${showError("avatar") ? "modal__input_invalid" : ""}`}
-          name="avatar"
-          id="avatar"
-          placeholder="avatar"
-          value={values.avatar}
-          onChange={handleChange}
-          aria-invalid={showError("avatar")}
-        />
-        <span
-          className={`modal__error ${showError("avatar") ? "modal__error_visible" : ""}`}
-        >
-          {errors.avatar || ""}
-        </span>
-      </label>
       <label htmlFor="email" className="modal__label">
         Email{" "}
         <input
@@ -118,7 +74,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
           className={`modal__input ${showError("email") ? "modal__input_invalid" : ""}`}
           name="email"
           id="email"
-          placeholder="email"
+          placeholder="Enter Email"
           value={values.email}
           onChange={handleChange}
           aria-invalid={showError("email")}
@@ -136,7 +92,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
           className={`modal__input ${showError("password") ? "modal__input_invalid" : ""}`}
           name="password"
           id="password"
-          placeholder="password"
+          placeholder="Enter Password"
           value={values.password}
           onChange={handleChange}
           aria-invalid={showError("password")}
@@ -145,6 +101,24 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
           className={`modal__error ${showError("password") ? "modal__error_visible" : ""}`}
         >
           {errors.password || ""}
+        </span>
+      </label>
+      <label htmlFor="register-name" className="modal__label">
+        Username{" "}
+        <input
+          type="text"
+          name="username"
+          className={`modal__input ${showError("name") ? "modal__input_invalid" : ""}`}
+          id="username"
+          placeholder="Enter Username"
+          value={values.name}
+          onChange={handleChange}
+          aria-invalid={showError("name")}
+        />
+        <span
+          className={`modal__error ${showError("name") ? "modal__error_visible" : ""}`}
+        >
+          {errors.name || ""}
         </span>
       </label>
     </ModalWithForm>
