@@ -125,10 +125,12 @@
   font-size: 12px;
   line-height: 16px;
   font-weight: 400;
+  visibility: visible;
 }
 
 .modal__error_visible {
   display: block;
+  visibility: visible;
 }
 
 .modal__submit {
@@ -137,10 +139,10 @@
   right: 0;
   height: 64px;
   width: 360px;
-  background-color: #e6e8eb;
+  background-color: #2a65cc;
   border: none;
   border-radius: 100px;
-  color: #b6bcbf;
+  color: #fff;
   font-family: "Roboto", Arial, sans-serif;
   font-size: 18px;
   font-weight: 500;
@@ -152,6 +154,11 @@
 .modal__submit:active {
   background-color: #2a65cc;
   color: #fff;
+}
+
+.modal__submit:disabled {
+  background-color: #e6e8eb;
+  color: #b6bcbf;
 }
 
 .modal__button-row {
