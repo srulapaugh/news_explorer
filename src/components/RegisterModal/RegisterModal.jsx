@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
@@ -41,6 +42,13 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
     handleChange,
     handleSubmit: submitForm,
   } = useFormWithValidation(defaultValues, validateForm);
+
+  const [touched, setTouched] = useState({});
+
+  const handleBlur = (evt) => {
+    const { name } = evt.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+  };
 
   function handleSubmit(evt) {
     const isFormValid = submitForm(evt);
@@ -110,7 +118,7 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
           name="username"
           className={`modal__input ${showError("name") ? "modal__input_invalid" : ""}`}
           id="username"
-          placeholder="Enter Username"
+          placeholder="Enter your username"
           value={values.name}
           onChange={handleChange}
           aria-invalid={showError("name")}

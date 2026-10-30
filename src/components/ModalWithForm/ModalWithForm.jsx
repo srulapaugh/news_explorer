@@ -44,7 +44,6 @@ function ModalWithForm({
             </button>
             {toggleText && (
               <p className="modal__toggle">
-                {" "}
                 or{" "}
                 <button
                   type="button"
