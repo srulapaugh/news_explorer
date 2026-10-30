@@ -8,7 +8,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import RegistrationSuccessModal from "../RegistrationSuccessModal/RegistrationSuccessModal";
 import Footer from "../Footer/Footer";
 
-import { sampleArticles } from "../../utils/constants";
+import { searchArticles } from "../../utils/newsApi";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
@@ -20,6 +20,7 @@ function App() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [hasSearchError, setHasSearchError] = useState(false);
   const [registerError, setRegisterError] = useState("");
   const [savedArticles, setSavedArticles] = useState([]);
 
@@ -74,11 +75,16 @@ function App() {
     setSearchKeyword(keyword);
     setHasSearched(true);
     setIsLoading(true);
+    setHasSearchError(false);
+    setArticles([]);
 
-    setTimeout(() => {
-      setArticles(sampleArticles);
-      setIsLoading(false);
-    }, 1500);
+    searchArticles(keyword)
+      .then(setArticles)
+      .catch((err) => {
+        console.error(err);
+        setHasSearchError(true);
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleSaveArticle = (article) => {

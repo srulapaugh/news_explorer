@@ -1,3 +1,6 @@
+// Every line I changed or added is marked with "CHANGED:" or "ADDED:".
+// Everything else is your original code.
+
 import { useState } from "react";
 import SearchForm from "../SearchForm/SearchForm";
 import NewsCardList from "../NewsCardList/NewsCardList";
@@ -16,6 +19,7 @@ function Main({
   isLoggedIn,
   onSearch,
   onSaveArticle,
+  hasSearchError,
 }) {
   const [visibleCount, setVisibleCount] = useState(CARDS_PER_PAGE);
 
@@ -49,7 +53,17 @@ function Main({
         <section className="main__results">
           {isLoading && <Preloader />}
 
-          {!isLoading && !hasResults && (
+          {!isLoading && hasSearchError && (
+            <div className="main__status">
+              <h2 className="main__status-title">Something went wrong</h2>
+              <p className="main__status-text">
+                Sorry, something went wrong during the request. Please try again
+                later.
+              </p>
+            </div>
+          )}
+
+          {!isLoading && !hasSearchError && !hasResults && (
             <div className="main__status">
               <h2 className="main__status-title">Nothing found</h2>
               <p className="main__status-text">
@@ -58,7 +72,7 @@ function Main({
             </div>
           )}
 
-          {!isLoading && hasResults && (
+          {!isLoading && !hasSearchError && hasResults && (
             <>
               <h2 className="main__results-title">Search results</h2>
               <NewsCardList
