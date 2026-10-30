@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
+const RegisterModal = ({
+  isOpen,
+  onRegister,
+  onClose,
+  onToggleClick,
+  submitError,
+}) => {
   const defaultValues = {
     email: "",
     password: "",
@@ -50,6 +56,10 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
     setTouched((prev) => ({ ...prev, [name]: true }));
   };
 
+  useEffect(() => {
+    if (!isOpen) setTouched({});
+  }, [isOpen]);
+
   function handleSubmit(evt) {
     const isFormValid = submitForm(evt);
 
@@ -60,20 +70,24 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
     onRegister({ ...values });
   }
 
-  const showError = (fieldName) => isSubmitted && Boolean(errors[fieldName]);
+  const currentErrors = validateForm(values);
+
+  const showError = (fieldName) =>
+    (touched[fieldName] || isSubmitted) && Boolean(currentErrors[fieldName]);
   const isSubmitDisabled = Object.keys(validateForm(values)).length > 0;
 
   return (
     <ModalWithForm
       name="register"
-      title="Sign Up"
+      title="Sign up"
       buttonText="Sign up"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isSubmitDisabled={isSubmitDisabled}
-      toggleText=" Sign In"
+      toggleText=" Sign in"
       onToggleClick={onToggleClick}
+      submitError={submitError}
     >
       <label htmlFor="email" className="modal__label">
         Email{" "}
@@ -81,16 +95,18 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
           type="email"
           className={`modal__input ${showError("email") ? "modal__input_invalid" : ""}`}
           name="email"
-          id="email"
-          placeholder="Enter Email"
+          id="register-email"
+          placeholder="Enter email"
           value={values.email}
           onChange={handleChange}
+          onBlur={handleBlur}
+          required
           aria-invalid={showError("email")}
         />
         <span
           className={`modal__error ${showError("email") ? "modal__error_visible" : ""}`}
         >
-          {errors.email || ""}
+          {currentErrors.email || ""}
         </span>
       </label>
       <label htmlFor="password" className="modal__label">
@@ -99,34 +115,37 @@ const RegisterModal = ({ isOpen, onRegister, onClose, onToggleClick }) => {
           type="password"
           className={`modal__input ${showError("password") ? "modal__input_invalid" : ""}`}
           name="password"
-          id="password"
-          placeholder="Enter Password"
+          id="register-password"
+          placeholder="Enter password"
           value={values.password}
           onChange={handleChange}
+          onBlur={handleBlur}
           aria-invalid={showError("password")}
         />
         <span
           className={`modal__error ${showError("password") ? "modal__error_visible" : ""}`}
         >
-          {errors.password || ""}
+          {currentErrors.password || ""}
         </span>
       </label>
       <label htmlFor="register-name" className="modal__label">
         Username{" "}
         <input
           type="text"
-          name="username"
+          name="name"
           className={`modal__input ${showError("name") ? "modal__input_invalid" : ""}`}
-          id="username"
+          id="register-name"
           placeholder="Enter your username"
           value={values.name}
           onChange={handleChange}
+          onBlur={handleBlur}
+          required
           aria-invalid={showError("name")}
         />
         <span
           className={`modal__error ${showError("name") ? "modal__error_visible" : ""}`}
         >
-          {errors.name || ""}
+          {currentErrors.name || ""}
         </span>
       </label>
     </ModalWithForm>

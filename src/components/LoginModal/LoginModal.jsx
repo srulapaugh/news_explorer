@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useFormWithValidation } from "../../hooks/useFormWithValidation";
 
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
@@ -33,6 +34,17 @@ const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {
     handleSubmit: submitForm,
   } = useFormWithValidation(defaultValues, validateForm);
 
+  const [touched, setTouched] = useState({});
+
+  const handleBlur = (evt) => {
+    const { name } = evt.target;
+    setTouched((prev) => ({ ...prev, [name]: true }));
+  };
+
+  useEffect(() => {
+    if (!isOpen) setTouched({});
+  }, [isOpen]);
+
   function handleSubmit(evt) {
     const isFormValid = submitForm(evt);
 
@@ -43,12 +55,15 @@ const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {
     onLogin({ ...values });
   }
 
-  const showError = (fieldName) => isSubmitted && Boolean(errors[fieldName]);
+  const currentErrors = validateForm(values);
+
+  const showError = (fieldName) =>
+    (touched[fieldName] || isSubmitted) && Boolean(currentErrors[fieldName]);
   const isSubmitDisabled = Object.keys(validateForm(values)).length > 0;
 
   return (
     <ModalWithForm
-      name="Sign in"
+      name="login"
       title="Sign in"
       buttonText="Sign in"
       onClose={onClose}
@@ -65,15 +80,17 @@ const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {
           name="email"
           className={`modal__input ${showError("email") ? "modal__input_invalid" : ""}`}
           id="login-email"
-          placeholder="Email"
+          placeholder="Enter email"
           value={values.email}
           onChange={handleChange}
+          onBlur={handleBlur}
+          required
           aria-invalid={showError("email")}
         />
         <span
           className={`modal__error ${showError("email") ? "modal__error_visible" : ""}`}
         >
-          {errors.email || ""}
+          {currentErrors.email || ""}
         </span>
       </label>
 
@@ -84,15 +101,17 @@ const LoginModal = ({ isOpen, onLogin, onClose, onToggleClick }) => {
           name="password"
           className={`modal__input ${showError("password") ? "modal__input_invalid" : ""}`}
           id="login-password"
-          placeholder="Password"
+          placeholder="Enter password"
           value={values.password}
           onChange={handleChange}
+          onBlur={handleBlur}
+          required
           aria-invalid={showError("password")}
         />
         <span
           className={`modal__error ${showError("password") ? "modal__error_visible" : ""}`}
         >
-          {errors.password || ""}
+          {currentErrors.password || ""}
         </span>
       </label>
     </ModalWithForm>

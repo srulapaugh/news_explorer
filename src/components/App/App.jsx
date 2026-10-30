@@ -20,15 +20,31 @@ function App() {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const [registerError, setRegisterError] = useState("");
 
-  const handleRegistration = ({ name, avatar, email, password }) => {
-    signup({ name, avatar, email, password })
-      .then(() => handleLogin({ email, password }))
-      .catch(console.error);
+  const handleRegistration = ({ email }) => {
+    if (email === "example@test.com") {
+      setRegisterError("This email is not available");
+      return;
+    }
+
+    setRegisterError("");
+    handleOpenModal("login");
   };
 
   const handleOpenModal = (modalName) => setActiveModal(modalName);
   const handleCloseModal = () => setActiveModal("");
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscape = (evt) => {
+      if (evt.key === "Escape") handleCloseModal();
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [activeModal]);
 
   const handleLogin = ({ email, password }) => {
     if (!email || !password) {
@@ -52,6 +68,8 @@ function App() {
       })
       .catch(console.error);
   };
+
+  const handleRegister = () => handleOpenModal("login");
 
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
@@ -88,17 +106,18 @@ function App() {
       />
       <Footer />
 
-      <RegisterModal
-        isOpen={activeModal === "register"}
-        onRegister={handleRegistration}
-        onClose={handleCloseModal}
-        onSwitchModal={() => handleOpenModal("login")}
-      />
       <LoginModal
         isOpen={activeModal === "login"}
         onClose={handleCloseModal}
         onLogin={handleLogin}
         onToggleClick={() => handleOpenModal("register")}
+      />
+      <RegisterModal
+        isOpen={activeModal === "register"}
+        onRegister={handleRegister}
+        onClose={handleCloseModal}
+        onToggleClick={() => handleOpenModal("login")}
+        submitError={registerError}
       />
     </div>
   );

@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import "./ModalWithForm.css";
 import close from "../../assets/close.png";
 
@@ -12,10 +14,23 @@ function ModalWithForm({
   isSubmitDisabled,
   toggleText,
   onToggleClick,
+  submitError,
 }) {
   const handleOverlayClick = (evt) => {
     if (evt.target === evt.currentTarget) onClose();
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleEscape = (evt) => {
+      if (evt.key === "Escape") onClose();
+    };
+
+    document.addEventListener("keydown", handleEscape);
+
+    return () => document.removeEventListener("keydown", handleEscape);
+  }, [isOpen, onClose]);
 
   return (
     <div
@@ -34,6 +49,8 @@ function ModalWithForm({
           noValidate
         >
           {children}
+          {submitError && <p className="modal__submit-error">{submitError}</p>}
+          <div className="modal__button-row"></div>
           <div className="modal__button-row">
             <button
               type="submit"
