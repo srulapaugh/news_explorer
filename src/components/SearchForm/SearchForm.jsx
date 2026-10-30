@@ -20,8 +20,8 @@ function SearchForm({ onSearch }) {
         type="text"
         className="search-form__input"
         name="keyword"
-        placeholder="Search Topic"
-        value="Enter Topic"
+        placeholder="Enter topic"
+        value={keyword}
         onChange={handleChange}
         required
       />
