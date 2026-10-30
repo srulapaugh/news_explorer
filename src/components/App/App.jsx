@@ -5,35 +5,33 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
+import RegistrationSuccessModal from "../RegistrationSuccessModal/RegistrationSuccessModal";
 import Footer from "../Footer/Footer";
 
-//import { sampleArticles } from "../../utils/constants";
-import "./App.css";
+import { sampleArticles } from "../../utils/constants";
 
 function App() {
   const [activeModal, setActiveModal] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser] = useState({ name: "" });
+  const [currentUser, setCurrentUser] = useState({ name: "" });
 
   const [articles, setArticles] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const [registerError, setRegisterError] = useState("");
+  const [savedArticles, setSavedArticles] = useState([]);
 
-  const handleRegistration = ({ email }) => {
-    if (email === "example@test.com") {
-      setRegisterError("This email is not available");
-      return;
-    }
-
+  const handleOpenModal = (modalName) => {
     setRegisterError("");
-    handleOpenModal("login");
+    setActiveModal(modalName);
   };
 
-  const handleOpenModal = (modalName) => setActiveModal(modalName);
-  const handleCloseModal = () => setActiveModal("");
+  const handleCloseModal = () => {
+    setRegisterError("");
+    setActiveModal("");
+  };
 
   useEffect(() => {
     if (!activeModal) return;
@@ -46,30 +44,25 @@ function App() {
     return () => document.removeEventListener("keydown", handleEscape);
   }, [activeModal]);
 
+  const handleRegistration = ({ email }) => {
+    if (email === "example@test.com") {
+      setRegisterError("This email is not available");
+      return;
+    }
+
+    setRegisterError("");
+    handleOpenModal("success");
+  };
+
   const handleLogin = ({ email, password }) => {
     if (!email || !password) {
       return;
     }
 
-    return signin({ email, password })
-      .then((res) => {
-        if (!res.token) {
-          return;
-        }
-        localStorage.setItem("jwt", res.token);
-        setIsLoggedIn(true);
-        closeActiveModal();
-        return checkToken(res.token);
-      })
-      .then((userData) => {
-        if (userData) {
-          setCurrentUser(userData);
-        }
-      })
-      .catch(console.error);
+    setCurrentUser({ name: "" });
+    setIsLoggedIn(true);
+    handleCloseModal();
   };
-
-  const handleRegister = () => handleOpenModal("login");
 
   const handleSignOut = () => {
     localStorage.removeItem("jwt");
@@ -88,6 +81,19 @@ function App() {
     }, 1500);
   };
 
+  const handleSaveArticle = (article) => {
+    if (!isLoggedIn) {
+      handleOpenModal("login");
+      return;
+    }
+
+    setSavedArticles((prev) =>
+      prev.some((a) => a.url === article.url)
+        ? prev.filter((a) => a.url !== article.url)
+        : [...prev, { ...article, keyword: searchKeyword }],
+    );
+  };
+
   return (
     <div className="app">
       <Header
@@ -96,14 +102,25 @@ function App() {
         onSignInClick={() => handleOpenModal("login")}
         onSignOut={handleSignOut}
       />
-      <Main
-        articles={articles}
-        isLoading={isLoading}
-        hasSearched={hasSearched}
-        // savedArticles={savedArticles}
-        //onSearch={onSearch}
-        //onSaveArticle={onSaveArticle}
-      />
+
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Main
+              articles={articles}
+              isLoading={isLoading}
+              hasSearched={hasSearched}
+              savedArticles={savedArticles}
+              isLoggedIn={isLoggedIn}
+              onSearch={handleSearch}
+              onSaveArticle={handleSaveArticle}
+            />
+          }
+        />
+        {/* TODO: add <Route path="/saved-news" element={<SavedNews ... />} /> once SavedNews is built */}
+      </Routes>
+
       <Footer />
 
       <LoginModal
@@ -114,10 +131,16 @@ function App() {
       />
       <RegisterModal
         isOpen={activeModal === "register"}
-        onRegister={handleRegister}
+        onRegister={handleRegistration}
         onClose={handleCloseModal}
         onToggleClick={() => handleOpenModal("login")}
         submitError={registerError}
+      />
+
+      <RegistrationSuccessModal
+        isOpen={activeModal === "success"}
+        onClose={handleCloseModal}
+        onSignInClick={() => handleOpenModal("login")}
       />
     </div>
   );
