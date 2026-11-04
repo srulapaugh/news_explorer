@@ -6,6 +6,7 @@ import Main from "../Main/Main";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import RegistrationSuccessModal from "../RegistrationSuccessModal/RegistrationSuccessModal";
+imp;
 import Footer from "../Footer/Footer";
 
 import { searchArticles } from "../../utils/newsApi";
