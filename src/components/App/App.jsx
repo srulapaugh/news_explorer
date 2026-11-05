@@ -6,7 +6,8 @@ import Main from "../Main/Main";
 import LoginModal from "../LoginModal/LoginModal";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import RegistrationSuccessModal from "../RegistrationSuccessModal/RegistrationSuccessModal";
-imp;
+import SavedNews from "../SavedNews/SavedNews";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Footer from "../Footer/Footer";
 
 import { searchArticles } from "../../utils/newsApi";
@@ -125,9 +126,19 @@ function App() {
             />
           }
         />
-        {/* TODO: add <Route path="/saved-news" element={<SavedNews ... />} /> once SavedNews is built */}
+        <Route
+          path="/saved-news"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <SavedNews
+                currentUser={currentUser}
+                savedArticles={savedArticles}
+                onDeleteArticle={handleDeleteArticle}
+              />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-
       <Footer />
 
       <LoginModal
