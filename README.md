@@ -17,9 +17,9 @@ This repository currently contains the **frontend** (Stage 1). Login, registrati
 
 ## Technologies
 
-- [React](https://react.dev) (function components and hooks)
-- [React Router](https://reactrouter.com) for routing and the protected route
-- [Vite](https://vitejs.dev) for development and builds
+- [React]
+- [React Router]
+- [Vite]
 - [News API](https://newsapi.org) for the article data
 - HTML5 and CSS3, with BEM class naming, Flexbox, and CSS Grid
 - Fonts: Roboto, Roboto Slab, and Inter, loaded with `@font-face`
@@ -42,4 +42,4 @@ Until the backend is built, these parts are stubbed on the frontend:
 
 Samantha Rulapaugh
 
-- **Project pitch video:** [add your video link here](https://your-video-link)
+- **Project pitch video:** https://www.loom.com/share/a2527129c4774fcc89888c6169ba9ccf
