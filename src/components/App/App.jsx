@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+import "./App.css";
+
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import LoginModal from "../LoginModal/LoginModal";
@@ -16,7 +18,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: "" });
+  const [currentUser, setCurrentUser] = useState({ name: "Sam" });
 
   const [articles, setArticles] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState("");
@@ -62,7 +64,7 @@ function App() {
       return;
     }
 
-    setCurrentUser({ name: "" });
+    setCurrentUser({ name: "Sam" });
     setIsLoggedIn(true);
     handleCloseModal();
   };
@@ -102,6 +104,10 @@ function App() {
     );
   };
 
+  const handleDeleteArticle = (article) => {
+    setSavedArticles((prev) => prev.filter((a) => a.url !== article.url));
+  };
+
   return (
     <div className="app">
       <Header
@@ -119,6 +125,7 @@ function App() {
               articles={articles}
               isLoading={isLoading}
               hasSearched={hasSearched}
+              hasSearchError={hasSearchError}
               savedArticles={savedArticles}
               isLoggedIn={isLoggedIn}
               onSearch={handleSearch}
