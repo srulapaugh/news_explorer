@@ -43,3 +43,5 @@ Until the backend is built, these parts are stubbed on the frontend:
 Samantha Rulapaugh
 
 - **Project pitch video:** https://www.loom.com/share/a2527129c4774fcc89888c6169ba9ccf
+
+- **Live Site** https://srulapaugh.github.io/news_explorer/
