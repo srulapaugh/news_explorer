@@ -1,0 +1,39 @@
+.modal_type_success .modal__content {
+  width: 430px;
+  min-height: auto;
+  padding: 40px 36px 44px;
+  border-radius: 16px;
+}
+
+.modal__title_type_success {
+  margin-bottom: 20px;
+}
+
+.modal__link {
+  padding: 0;
+  background: none;
+  border: none;
+  color: #2f71e5;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.modal__link:hover {
+  opacity: 0.7;
+}
+
+.modal__link:focus-visible {
+  outline: 2px solid #2f71e5;
+  outline-offset: 4px;
+}
+
+@media screen and (max-width: 600px) {
+  .modal_type_success .modal__content {
+    width: 100%;
+    padding: 32px 16px;
+    border-radius: 20px 20px 0 0;
+  }
+}
